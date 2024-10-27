@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
 
     const guitar = [["E"], ["B"], ["G"], ["D"], ["A"], ["E"]];
 
+    const [selected, setSetselected] = useState("C");
+
     guitar.forEach((k) => {
         let i = 1;
         while (i !== 13) {
@@ -30,18 +33,37 @@ function App() {
         }
     });
 
+    const handleClick = (note: string) => {
+        setSetselected((old) => {
+            if (old === note) {
+                return "";
+            }
+            return note;
+        });
+    };
+
     return (
         <main>
             <div className="piano">
                 {white.map((k) => (
-                    <div key={k} className="key">
+                    <div
+                        key={k}
+                        className={"key " + (selected === k ? "active" : "")}
+                        onClick={() => handleClick(k)}
+                    >
                         {k}
                     </div>
                 ))}
 
                 <div className="blacks">
                     {black.slice(0, 2).map((k) => (
-                        <div className="black key" key={k}>
+                        <div
+                            className={
+                                "black key" + (selected === k ? " active" : "")
+                            }
+                            onClick={() => handleClick(k)}
+                            key={k}
+                        >
                             {k}
                         </div>
                     ))}
@@ -49,19 +71,25 @@ function App() {
 
                 <div className="blacks-2">
                     {black.slice(2).map((k) => (
-                        <div className="black key" key={k}>
+                        <div
+                            className={
+                                "black key" + (selected === k ? " active" : "")
+                            }
+                            onClick={() => handleClick(k)}
+                            key={k}
+                        >
                             {k}
                         </div>
                     ))}
                 </div>
             </div>
 
-            <div className="guitar">
+            <div className={"guitar " + (selected ? "has-active" : "")}>
                 {new Array(13).fill("").map((_, i) => (
                     <div
                         className={
                             "fret" +
-                            ([1, 3, 5, 7, 9, 12].includes(i) ? ' empty' : "")
+                            ([1, 3, 5, 7, 9, 12].includes(i) ? " empty" : "")
                         }
                         key={i}
                         data-num={i}
@@ -73,9 +101,10 @@ function App() {
                         <div
                             className={
                                 "fret" +
-                                (i === guitar.length - 1 ? " last" : "")
+                                (i === guitar.length - 1 ? " last" : "") +
+                                (f === selected ? " active" : "")
                             }
-                            key={f+n}
+                            key={f + n}
                             data-note={f}
                         ></div>
                     ))

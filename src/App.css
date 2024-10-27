@@ -19,11 +19,27 @@
   justify-content: center;
   padding-bottom: 0.5rem;
 
+  cursor: pointer ;
+
   &.black {
     color: white;
     background-color: black;
     height: 12rem;
     width: 3rem;
+  }
+
+  &:hover{ 
+    background-color: cornflowerblue;
+  }
+
+  &.active {
+    background-color: coral;
+  }
+
+  transition: background-color 0.2s ease-in;
+
+  &:not(.black) {
+    font-weight: 600;
   }
 }
 
@@ -47,6 +63,10 @@
   grid-template-columns: repeat(13, 1fr);
   position: absolute;
   bottom: 1rem;
+
+  &.has-active .fret{
+    color: rgba(245, 245, 245, 0.45);
+  }
 }
 
 .fret {
@@ -55,7 +75,13 @@
   text-align: center;
 
   &:not(.last) {
-    border-bottom-color: blue;
+    & {
+      border-bottom-color: blueviolet;
+    }
+    &:nth-child(n+40) {
+      border-bottom-color: blue;
+      border-bottom-width: 2px;
+    }
   }
 
   &::after {
@@ -63,6 +89,12 @@
     display: block;
     top: -1rem;
     position: relative;
+  }
+
+  &.active::after {
+    color: chartreuse;
+    transition: all 0.3s ease-in;
+    font-size: 1.4rem;
   }
   
   &:nth-child(13n+1) {
