@@ -1,3 +1,5 @@
 # Guitar note finder
 
-![Screnshot](./image.png)
+[Site](https://shiki-boy.github.io/guitar-note/)
+
+![Screenshot](./image.png)

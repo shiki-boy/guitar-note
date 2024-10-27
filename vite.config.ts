@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'build',
-    assetsDir: 'guitar-note/assets'
+    // assetsDir: 'guitar-note/assets'
   }
 })
