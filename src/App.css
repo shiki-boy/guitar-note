@@ -40,3 +40,43 @@
   display: flex;
   gap: 1.2rem;
 }
+
+.guitar {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+  position: absolute;
+  bottom: 1rem;
+}
+
+.fret {
+  height: 2.4rem;
+  border: 1px solid black;
+  text-align: center;
+
+  &:not(.last) {
+    border-bottom-color: blue;
+  }
+
+  &::after {
+    content: attr(data-note);
+    display: block;
+    top: -1rem;
+    position: relative;
+  }
+  
+  &:nth-child(13n+1) {
+    background-color: #3a87873b;
+  }
+  
+  &.empty {
+    &::after {
+      content: attr(data-num);
+      position: relative;
+      font-weight: bold;
+      color: chartreuse;
+      font-size: 1.2rem;
+      top: -2rem;
+    }
+  }
+}
